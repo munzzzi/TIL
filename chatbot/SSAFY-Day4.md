@@ -106,3 +106,36 @@ def lotto():
 </html>
 ```
 
+
+
+### chatbot사용하기 
+
+```python
+#텔레그램 다운> botfather 검색 > token을 받음 > 아래와같은 코드입력후 실행ㄱㄱ
+
+import os 
+import requests
+import json
+ 
+token = os.getenv('TELE_TOKEN')
+method = 'getUpdates'
+
+# url="https://api.telegram.org/bot{}/{}".format(token,method)
+#<C9이 텔레그램 챗봇기능을 막아놔서 우회해야함>아래!
+url = "https://api.hphk.io/telegram/bot{}/{}".format(token,method)
+res = requests.get(url).json()
+
+user_id = res ["result"] [0] ["message"] ["from"] ["id"]
+
+msg = "머먹을래?"
+
+method='sendMessage'
+
+
+msg_url="https://api.hphk.io/telegram/bot{}/{}?chat_id={}&text={}".format(token,method,user_id,msg)
+print(msg_url)
+requests.get(msg_url)
+
+
+```
+
